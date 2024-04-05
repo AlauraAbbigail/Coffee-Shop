@@ -8,7 +8,11 @@ public class Espresso extends Coffee implements ActionListener {
     JFrame frame = new JFrame();
     JLabel label = new JLabel("You have selected Espresso Menu");
     JButton goBack = new JButton("<--");
-    JComboBox comboBox = new JComboBox();
+    JButton latte = new JButton("Latte");
+    JButton cappuccino = new JButton("Cappuccino");
+    JLabel labelLatte = new JLabel("Latte");
+    JLabel labelCapp = new JLabel("Cappuccino");
+    String[] espressoShots = {"1", "2", "3", "4"};
 
     Espresso() {
 
@@ -19,13 +23,13 @@ public class Espresso extends Coffee implements ActionListener {
         goBack.setFocusable(false);
         goBack.addActionListener(this);
 
-        comboBox = new JComboBox(milkOptions);
-        comboBox.addActionListener(this);
-        comboBox.setBounds(50,75,150,30);
 
         frame.add(goBack);
         frame.add(label);
-        frame.add(comboBox);
+        frame.add(labelLatte);
+        frame.add(labelCapp);
+        frame.add(latte);
+        frame.add(cappuccino);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700,400);
@@ -39,8 +43,13 @@ public class Espresso extends Coffee implements ActionListener {
             frame.dispose();
             Coffee coffee = new Coffee();
         }
-        if(e.getSource()==comboBox) {
-                System.out.println(comboBox.getSelectedItem());
-            }
+        if(e.getSource()==latte) {
+            frame.dispose();
+            Latte latteMenu = new Latte();
+        }
+        if(e.getSource()==cappuccino) {
+            frame.dispose();
+            Cappuccino cappMenu = new Cappuccino();
+        }
         }
     }

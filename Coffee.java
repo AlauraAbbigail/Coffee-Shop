@@ -11,6 +11,8 @@ public class Coffee implements ActionListener {
     JComboBox comboBox = new JComboBox();
     String[] milkOptions = {"whole milk", "almond milk", "oatmilk"};
     String[] flavors = {"vanilla", "mocha", "caramel", "brown sugar"};
+    String[] size = {"12 oz", "16 oz"};
+    String[] temp = {"Hot", "Iced"};
 
     Coffee() {
 
