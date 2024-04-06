@@ -12,7 +12,7 @@ public class Espresso extends Coffee implements ActionListener {
     JButton cappuccino = new JButton("Cappuccino");
     JLabel labelLatte = new JLabel("Latte");
     JLabel labelCapp = new JLabel("Cappuccino");
-    String[] espressoShots = {"1", "2", "3", "4"};
+    String[] eShots = {"1", "2", "3", "4"};
 
     Espresso() {
 
@@ -23,6 +23,15 @@ public class Espresso extends Coffee implements ActionListener {
         goBack.setFocusable(false);
         goBack.addActionListener(this);
 
+        latte.setBounds(150,140,150,40);
+        latte.setFocusable(false);
+        latte.addActionListener(this);
+        latte.setBackground(new Color(113,162,130));
+
+        cappuccino.setBounds(400,140,150,40);
+        cappuccino.setFocusable(false);
+        cappuccino.addActionListener(this);
+        cappuccino.setBackground(new Color(113,162,130));
 
         frame.add(goBack);
         frame.add(label);

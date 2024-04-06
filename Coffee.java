@@ -11,8 +11,10 @@ public class Coffee implements ActionListener {
     JComboBox comboBox = new JComboBox();
     String[] milkOptions = {"whole milk", "almond milk", "oatmilk"};
     String[] flavors = {"vanilla", "mocha", "caramel", "brown sugar"};
-    String[] size = {"12 oz", "16 oz"};
+    String[] size = {"6 oz","8 oz","12 oz", "16 oz"};
     String[] temp = {"Hot", "Iced"};
+    JButton finalCheckout = new JButton("Ready to check out?");
+    JButton addMore = new JButton("Want to order more?");
 
     Coffee() {
 
