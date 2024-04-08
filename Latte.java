@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class Latte extends Espresso implements ActionListener {
     JFrame frame = new JFrame();
-    JButton goBack = new JButton("<--");
+    JButton goBack = new JButton("<");
     JLabel labelSize = new JLabel("Select the size: ");
     JComboBox comboBox = new JComboBox();
     JLabel labelTemp = new JLabel("Select Hot or Iced: ");
