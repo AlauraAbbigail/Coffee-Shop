@@ -14,12 +14,18 @@ public class Latte extends Espresso implements ActionListener {
     JComboBox comboBox3 = new JComboBox();
     JLabel labelFlavors = new JLabel("Any flavors? ");
     JComboBox comboBox4 = new JComboBox();
+    JButton addCart = new JButton("Add to cart?");
+    JButton cart = new JButton();
 
     Latte() {
 
         goBack.setBounds(640,10,40,40);
         goBack.setFocusable(false);
         goBack.addActionListener(this);
+
+        cart.setBounds(590,10,40,40);
+        cart.setFocusable(false);
+        cart.addActionListener(this);
 
         labelSize.setBounds(50,45,150,25);
         labelSize.setFont(new Font(null, Font.BOLD,15));
@@ -49,6 +55,11 @@ public class Latte extends Espresso implements ActionListener {
         comboBox4.addActionListener(this);
         comboBox4.setBounds(50,285,150,30);
 
+        addCart = new JButton("Add to cart?");
+        addCart.setBounds(300, 285, 150, 30);
+        addCart.setFocusable(false);
+        addCart.addActionListener(this);
+
         background.setBounds(0,0,700,400);
         background.setFocusable(false);
         background.setVisible(true);
@@ -63,6 +74,8 @@ public class Latte extends Espresso implements ActionListener {
         frame.add(labelFlavors);
         frame.add(comboBox4);
         frame.add(background);
+        frame.add(addCart);
+        frame.add(cart);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700,400);
@@ -86,6 +99,15 @@ public class Latte extends Espresso implements ActionListener {
         }
         if (e.getSource() == comboBox4) {
             System.out.println(comboBox4.getSelectedItem());
+        }
+        if (e.getSource() == addCart) {
+//            System.out.println(addCart.getSelectedItem());
+            frame.dispose();
+            Checkout checkout = new Checkout();
+        }
+        if (e.getSource() == cart) {
+            frame.dispose();
+            Checkout checkout = new Checkout();
         }
     }
 }
