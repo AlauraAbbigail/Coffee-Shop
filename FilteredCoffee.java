@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 public class FilteredCoffee extends Coffee implements ActionListener {
     JFrame frame = new JFrame();
     JLabel label = new JLabel("You have selected the Filtered Coffee Menu");
-    JButton goBack = new JButton("<--");
+    JButton goBack = new JButton("<");
     JComboBox comboBox = new JComboBox();
     JLabel label2 = new JLabel("Select Brew Type:");
 
