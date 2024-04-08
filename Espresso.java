@@ -33,12 +33,17 @@ public class Espresso extends Coffee implements ActionListener {
         cappuccino.addActionListener(this);
         cappuccino.setBackground(new Color(113,162,130));
 
+        background.setBounds(0,0,700,400);
+        background.setFocusable(false);
+        background.setVisible(true);
+
         frame.add(goBack);
         frame.add(label);
         frame.add(labelLatte);
         frame.add(labelCapp);
         frame.add(latte);
         frame.add(cappuccino);
+        frame.add(background);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700,400);

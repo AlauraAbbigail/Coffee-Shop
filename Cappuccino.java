@@ -22,9 +22,14 @@ public class Cappuccino extends Espresso implements ActionListener {
         comboBox.addActionListener(this);
         comboBox.setBounds(50,75,150,30);
 
+        background.setBounds(0,0,700,400);
+        background.setFocusable(false);
+        background.setVisible(true);
+
         frame.add(goBack);
         frame.add(labelMilk);
         frame.add(comboBox);
+        frame.add(background);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700,400);

@@ -16,19 +16,32 @@ public class Coffee implements ActionListener {
     JButton addCart = new JButton("Add to Cart?");
     JButton finalCheckout = new JButton("Ready to check out?");
     JButton addMore = new JButton("Want to order more?");
-    ImageIcon pic = new ImageIcon("Coffee_Background.png");
+
+    //background image made by Alaura Buzbee
+    ImageIcon pic = new ImageIcon(getClass().getResource("Coffee_Background.png"));
     Image icon = pic.getImage();
     Image scaledImage = icon.getScaledInstance(700, 400, Image.SCALE_SMOOTH);
     JLabel background = new JLabel(new ImageIcon(scaledImage));
 
+    //espresso image made by Alaura Buzbee
+    ImageIcon pic2 = new ImageIcon(getClass().getResource("Cappuccino.png"));
+    Image icon2 = pic2.getImage();
+    Image scaledImage2 = icon2.getScaledInstance(700, 400, Image.SCALE_SMOOTH);
+    JLabel espressoImage = new JLabel(new ImageIcon(scaledImage2));
+
+    //filter coffee image mae by Alaura Buzbee
+    ImageIcon pic3 = new ImageIcon(getClass().getResource("Filter_Coffee.png"));
+    Image icon3 = pic3.getImage();
+    Image scaledImage3 = icon3.getScaledInstance(700, 400, Image.SCALE_SMOOTH);
+    JLabel filterImage = new JLabel(new ImageIcon(scaledImage3));
 
     Coffee() {
 
-        option1.setBounds(250, 140, 150, 40);
+        option1.setBounds(150, 280, 150, 40);
         option1.setFocusable(false);
         option1.addActionListener(this);
 
-        option2.setBounds(250, 190, 150, 40);
+        option2.setBounds(400, 280, 150, 40);
         option2.setFocusable(false);
         option2.addActionListener(this);
 
@@ -38,9 +51,23 @@ public class Coffee implements ActionListener {
         comboBox = new JComboBox();
         comboBox.addActionListener(this);
 
+        background.setBounds(0,0,700,400);
+        background.setFocusable(false);
+        background.setVisible(true);
+
+        espressoImage.setBounds(100,140,100,100);
+        espressoImage.setFocusable(false);
+        espressoImage.setVisible(true);
+
+        filterImage.setBounds(350,140,100,100);
+        filterImage.setFocusable(false);
+        filterImage.setVisible(true);
+
         frame.add(option1);
         frame.add(option2);
         frame.add(background);
+        frame.add(espressoImage);
+        frame.add(filterImage);
 
 //        getContentPane.setBackground(Color.RED);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

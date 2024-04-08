@@ -49,6 +49,10 @@ public class Latte extends Espresso implements ActionListener {
         comboBox4.addActionListener(this);
         comboBox4.setBounds(50,285,150,30);
 
+        background.setBounds(0,0,700,400);
+        background.setFocusable(false);
+        background.setVisible(true);
+
         frame.add(goBack);
         frame.add(labelSize);
         frame.add(comboBox);
@@ -58,6 +62,7 @@ public class Latte extends Espresso implements ActionListener {
         frame.add(comboBox3);
         frame.add(labelFlavors);
         frame.add(comboBox4);
+        frame.add(background);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700,400);
