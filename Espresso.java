@@ -7,7 +7,7 @@ public class Espresso extends Coffee implements ActionListener {
 
     JFrame frame = new JFrame();
     JLabel label = new JLabel("You have selected Espresso Menu");
-    JButton goBack = new JButton("<--");
+    JButton goBack = new JButton("<");
     JButton latte = new JButton("Latte");
     JButton cappuccino = new JButton("Cappuccino");
     JLabel labelLatte = new JLabel("Latte");
