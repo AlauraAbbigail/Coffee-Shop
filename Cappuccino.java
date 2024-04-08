@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class Cappuccino extends Espresso implements ActionListener {
     JFrame frame = new JFrame();
-    JButton goBack = new JButton("<--");
+    JButton goBack = new JButton("<");
     JLabel labelMilk = new JLabel("Select Milk Type: ");
     JComboBox comboBox = new JComboBox();
 
