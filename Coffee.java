@@ -13,8 +13,14 @@ public class Coffee implements ActionListener {
     String[] flavors = {"vanilla", "mocha", "caramel", "brown sugar"};
     String[] size = {"6 oz","8 oz","12 oz", "16 oz"};
     String[] temp = {"Hot", "Iced"};
+    JButton addCart = new JButton("Add to Cart?");
     JButton finalCheckout = new JButton("Ready to check out?");
     JButton addMore = new JButton("Want to order more?");
+    ImageIcon pic = new ImageIcon("Coffee_Background.png");
+    Image icon = pic.getImage();
+    Image scaledImage = icon.getScaledInstance(700, 400, Image.SCALE_SMOOTH);
+    JLabel background = new JLabel(new ImageIcon(scaledImage));
+
 
     Coffee() {
 
@@ -34,6 +40,7 @@ public class Coffee implements ActionListener {
 
         frame.add(option1);
         frame.add(option2);
+        frame.add(background);
 
 //        getContentPane.setBackground(Color.RED);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
