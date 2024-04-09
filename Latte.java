@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 public class Latte extends Espresso implements ActionListener {
     JFrame frame = new JFrame();
     JButton goBack = new JButton("<");
+    JLabel labelMenu = new JLabel("You have selected the Latte Menu");
     JLabel labelSize = new JLabel("Select the size: ");
     JComboBox comboBox = new JComboBox();
     JLabel labelTemp = new JLabel("Select Hot or Iced: ");
@@ -18,6 +19,9 @@ public class Latte extends Espresso implements ActionListener {
     JButton cart = new JButton();
 
     Latte() {
+
+        labelMenu.setBounds(5,0,600,50);
+        label.setFont(new Font(null, Font.PLAIN,20));
 
         goBack.setBounds(640,10,40,40);
         goBack.setFocusable(false);
@@ -64,6 +68,7 @@ public class Latte extends Espresso implements ActionListener {
         background.setFocusable(false);
         background.setVisible(true);
 
+        frame.add(labelMenu);
         frame.add(goBack);
         frame.add(labelSize);
         frame.add(comboBox);

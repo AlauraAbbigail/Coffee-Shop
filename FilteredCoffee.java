@@ -10,6 +10,8 @@ public class FilteredCoffee extends Coffee implements ActionListener {
     JComboBox comboBox = new JComboBox();
     JLabel label2 = new JLabel("Select Brew Type:");
     String[] brewType = {"Light", "Medium", "Dark"};
+    JButton addCart = new JButton("Add to cart?");
+    JButton cart = new JButton();
 
 
     FilteredCoffee() {
@@ -21,12 +23,21 @@ public class FilteredCoffee extends Coffee implements ActionListener {
         goBack.setFocusable(false);
         goBack.addActionListener(this);
 
+        cart.setBounds(590,10,40,40);
+        cart.setFocusable(false);
+        cart.addActionListener(this);
+
         label2.setBounds(50,45,150,25);
         label2.setFont(new Font(null, Font.BOLD,15));
 
         comboBox = new JComboBox(brewType);
         comboBox.addActionListener(this);
         comboBox.setBounds(50,75,150,30);
+
+        addCart = new JButton("Add to cart?");
+        addCart.setBounds(300, 285, 150, 30);
+        addCart.setFocusable(false);
+        addCart.addActionListener(this);
 
         background.setBounds(0,0,700,400);
         background.setFocusable(false);

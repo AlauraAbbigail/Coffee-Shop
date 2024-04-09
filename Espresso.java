@@ -65,5 +65,5 @@ public class Espresso extends Coffee implements ActionListener {
             frame.dispose();
             Cappuccino cappMenu = new Cappuccino();
         }
-        }
     }
+}

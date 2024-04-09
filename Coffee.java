@@ -18,6 +18,12 @@ public class Coffee implements ActionListener {
     JButton finalCheckout = new JButton("Ready to check out?");
     JButton addMore = new JButton("Want to order more?");
 
+    //menu title (used a generator to create)
+    ImageIcon menuPic = new ImageIcon(getClass().getResource("8-Bit_Coffee.png"));
+    Image menuIcon = menuPic.getImage();
+    Image scaledMenuImage = menuIcon.getScaledInstance(650,45, Image.SCALE_SMOOTH);
+    JLabel menuTitle = new JLabel(new ImageIcon(scaledMenuImage));
+
     //background image made by Alaura Buzbee
     ImageIcon pic = new ImageIcon(getClass().getResource("Coffee_Background.png"));
     Image icon = pic.getImage();
@@ -64,10 +70,15 @@ public class Coffee implements ActionListener {
         filterImage.setFocusable(false);
         filterImage.setVisible(true);
 
+        menuTitle.setBounds(15,5,650,60);
+        menuTitle.setFocusable(false);
+        menuTitle.setVisible(true);
+
         frame.add(option1);
         frame.add(option2);
         frame.add(espressoImage);
         frame.add(filterImage);
+        frame.add(menuTitle);
         frame.add(background);
 
 //        getContentPane.setBackground(Color.RED);
