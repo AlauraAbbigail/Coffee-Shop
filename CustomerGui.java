@@ -93,9 +93,11 @@ public class CustomerGui implements ActionListener {
         String phone = phone1.getText();
         String address = resident.getText();
         if(e.getSource()==premium){
-            premiumCustomer.payCoffee();
+            System.out.println("Your order:"+name+" "+phone+" "+address+ " PLUS A 10 PERCENT DISCOUNT ADDED AS A PREMIUM CUSTOMER");
         }
-
+        if(e.getSource() == viewOrder){
+            JOptionPane.showMessageDialog(null,"ORDER SUCCESSFUL FOR:"+name +" phone: "+phone+" address: "+address);
+        }
     }
 }
 
