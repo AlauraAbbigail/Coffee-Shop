@@ -1,30 +1,19 @@
 abstract class Customer{
-    private String firstName;
-    private String lastName;
-    private String email;
+    private String name;
     private String address;
     private int phoneNumber;
-    Customer(String firstName,String lastName,String email,String address,int phoneNumber){
-        this.firstName = firstName;
-        this.lastName = lastName;
+    Customer(String name,String address,int phoneNumber){
+        this.name = name;
         this.address = address;
-        this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
-    public String getFirstName() {
-        return this.firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-    public void setLastName(String lastName){
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {
@@ -35,13 +24,6 @@ abstract class Customer{
         this.address = address;
     }
 
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public int getPhoneNumber() {
         return this.phoneNumber;
