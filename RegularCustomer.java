@@ -1,10 +1,13 @@
 public class RegularCustomer extends Customer{
-    public RegularCustomer(String firstName,String lastName,int phoneNumber,String email,String address){
-        super(firstName, lastName, email, address, phoneNumber);
+    public RegularCustomer(String name,int phoneNumber,String address){
+        super(name, address, phoneNumber);
     }
+
     public void regularPayCoffee(){
-        System.out.println(getFirstName()+" "+ getLastName()+" "+" is a regular customer so can pay for coffee using credit or cash.");
+        System.out.println("Regular customer can pay for coffee using credit or cash.");
     }
+
+
     @Override
     public void payCoffee() {
         regularPayCoffee();
