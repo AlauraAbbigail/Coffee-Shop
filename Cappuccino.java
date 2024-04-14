@@ -4,14 +4,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Cappuccino extends Espresso implements ActionListener {
+    private double total;
+    private double subtotal= 0.0;
+    private final double cappuccino = 5.00;
     JFrame frame = new JFrame();
     JButton goBack = new JButton("<");
     JLabel labelMilk = new JLabel("Select Milk Type: ");
     JComboBox comboBox = new JComboBox();
     JButton addCart = new JButton("Add to cart?");
     JButton cart = new JButton();
+    JCheckBox vanila= new JCheckBox("Vanila $1.00");
+    JCheckBox mocha = new JCheckBox("Mocha  $2.00");
+    JCheckBox caramel = new JCheckBox("Caramel  $3.00");
+    JCheckBox brownSugar = new JCheckBox("Brown Sugar   $5.00");
+    JLabel labelMilk = new JLabel("Select Milk Type: ");
+    JTextField CapTotal = new JTextField();
+    JTextField CapSub = new JTextField();
 
     Cappuccino() {
+        //subtotal and total LABEL THEM LATER.
+        CapSub.setBounds(50,200,300,30);
+        CapTotal.setBounds(50,300,300,30);
 
         goBack.setBounds(640,10,40,40);
         goBack.setFocusable(false);
@@ -40,6 +53,8 @@ public class Cappuccino extends Espresso implements ActionListener {
         frame.add(goBack);
         frame.add(labelMilk);
         frame.add(comboBox);
+        frame.add(CapTotal);
+        frame.add(CapSub);
         frame.add(background);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,6 +64,20 @@ public class Cappuccino extends Espresso implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        if(vanila.isSelected()) {
+            subtotal = subtotal + 1.00;
+        } else if (mocha.isSelected()) {
+            subtotal = subtotal + 2.00;
+        } else if (caramel.isSelected()) {
+            subtotal = subtotal+3.00;
+        }else if (brownSugar.isSelected()) {
+            subtotal = subtotal + 5.00;
+        }
+        CapSub.setText(Double.toString(subtotal));
+        subtotal= Double.parseDouble(CapSub.getText());
+        total= cappuccino+subtotal;
+        CapSub.setText(Double.toString(subtotal));
+        CapTotal.setText(Double.toString(total));
         if (e.getSource() == goBack) {
             frame.dispose();
             Espresso espressoMenu = new Espresso();
