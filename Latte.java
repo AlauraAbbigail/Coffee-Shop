@@ -13,23 +13,22 @@ public class Latte extends Espresso implements ActionListener {
     JComboBox comboBox2 = new JComboBox();
     JLabel labelShots = new JLabel("How many espresso shots? ");
     JComboBox comboBox3 = new JComboBox();
-    JLabel labelFlavors = new JLabel("Any flavors? ");
+    JLabel labelMilk = new JLabel("Select Milk Type: ");
     JComboBox comboBox4 = new JComboBox();
-    JButton addCart = new JButton("Add to cart?");
-    JButton cart = new JButton();
+    //JButton cart = new JButton();
 
     Latte() {
 
         labelMenu.setBounds(5,0,600,50);
-        label.setFont(new Font(null, Font.PLAIN,20));
+        //label.setFont(new Font(null, Font.PLAIN,20));
 
-        goBack.setBounds(640,10,40,40);
+        goBack.setBounds(630,10,50,50);
         goBack.setFocusable(false);
         goBack.addActionListener(this);
 
-        cart.setBounds(590,10,40,40);
-        cart.setFocusable(false);
-        cart.addActionListener(this);
+//        cart.setBounds(590,10,40,40);
+//        cart.setFocusable(false);
+//        cart.addActionListener(this);
 
         labelSize.setBounds(50,45,150,25);
         labelSize.setFont(new Font(null, Font.BOLD,15));
@@ -52,17 +51,36 @@ public class Latte extends Espresso implements ActionListener {
         comboBox3.addActionListener(this);
         comboBox3.setBounds(50,215,150,30);
 
-        labelFlavors.setBounds(50, 255,150,25);
-        labelFlavors.setFont(new Font(null, Font.BOLD, 15));
+        labelMilk.setBounds(50, 255,150,25);
+        labelMilk.setFont(new Font(null, Font.BOLD, 15));
 
-        comboBox4 = new JComboBox(flavors);
+        comboBox4 = new JComboBox(milkOptions);
         comboBox4.addActionListener(this);
         comboBox4.setBounds(50,285,150,30);
 
-        addCart = new JButton("Add to cart?");
-        addCart.setBounds(300, 285, 150, 30);
-        addCart.setFocusable(false);
-        addCart.addActionListener(this);
+        labelFlavors.setBounds(300,45,250,25);
+        labelFlavors.setFont(new Font(null, Font.BOLD, 15));
+
+        flavorsCB1 = new JCheckBox("vanilla (+$0.50)");
+        flavorsCB1.addActionListener(this);
+        flavorsCB1.setBounds(300,75,150,30);
+
+        flavorsCB2 = new JCheckBox("mocha (+$0.50)");
+        flavorsCB2.addActionListener(this);
+        flavorsCB2.setBounds(300,105,150,30);
+
+        flavorsCB3 = new JCheckBox("caramel (+$0.50)");
+        flavorsCB3.addActionListener(this);
+        flavorsCB3.setBounds(300,135,150,30);
+
+        flavorsCB4 = new JCheckBox("brown sugar (+$0.75)");
+        flavorsCB4.addActionListener(this);
+        flavorsCB4.setBounds(300,165,150,30);
+
+        prepareDrink = new JButton("Prepare Order");
+        prepareDrink.setBounds(300, 285, 150, 30);
+        prepareDrink.setFocusable(false);
+        prepareDrink.addActionListener(this);
 
         background.setBounds(0,0,700,400);
         background.setFocusable(false);
@@ -76,11 +94,16 @@ public class Latte extends Espresso implements ActionListener {
         frame.add(comboBox2);
         frame.add(labelShots);
         frame.add(comboBox3);
-        frame.add(labelFlavors);
+        frame.add(labelMilk);
         frame.add(comboBox4);
+        frame.add(labelFlavors);
+        frame.add(flavorsCB1);
+        frame.add(flavorsCB2);
+        frame.add(flavorsCB3);
+        frame.add(flavorsCB4);
         frame.add(background);
-        frame.add(addCart);
-        frame.add(cart);
+        frame.add(prepareDrink);
+        //frame.add(cart);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700,400);
@@ -105,7 +128,19 @@ public class Latte extends Espresso implements ActionListener {
         if (e.getSource() == comboBox4) {
             System.out.println(comboBox4.getSelectedItem());
         }
-        if (e.getSource() == addCart) {
+        if (e.getSource() == flavorsCB1) {
+            System.out.println(flavorsCB1.getText());
+        }
+        if (e.getSource() == flavorsCB2) {
+            System.out.println(flavorsCB2.getText());
+        }
+        if (e.getSource() == flavorsCB3) {
+            System.out.println(flavorsCB3.getText());
+        }
+        if (e.getSource() == flavorsCB4) {
+            System.out.println(flavorsCB4.getText());
+        }
+        if (e.getSource() == prepareDrink) {
 //            System.out.println(addCart.getSelectedItem());
             frame.dispose();
             Checkout checkout = new Checkout();
