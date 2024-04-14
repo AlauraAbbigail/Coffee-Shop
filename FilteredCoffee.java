@@ -33,6 +33,23 @@ public class FilteredCoffee extends Coffee implements ActionListener {
         comboBox = new JComboBox(brewType);
         comboBox.addActionListener(this);
         comboBox.setBounds(50,75,150,30);
+         comboBox = new JComboBox(brewType);
+        comboBox.addActionListener(this);
+        comboBox.setBounds(50,75,150,30);
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()== addCart) {
+                    String orderDetail = (String) comboBox.getSelectedItem();
+                    coffee.saveOrder(orderDetail);
+                    JOptionPane.showMessageDialog(null, "order placed!");
+                }
+            }
+        });
+        orderTextArea = new JTextArea(10, 30);
+        orderTextArea.setBounds(400,100,300,200);
+        JScrollPane scrollPane = new JScrollPane(orderTextArea);
+        updateOrderTextArea();
 
         addCart = new JButton("Add to cart?");
         addCart.setBounds(300, 285, 150, 30);
