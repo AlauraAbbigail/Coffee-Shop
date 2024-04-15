@@ -1,4 +1,4 @@
-import javax.swing.*;
+rt javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +37,7 @@ public class Cappuccino extends Espresso implements ActionListener {
     JLabel labelEType = new JLabel("What kind of espresso?");
     JButton addCart = new JButton("Add to cart?");
 
-    JButton cart = new JButton();
+    JButton cart = new JButton("CheckOut");
     JLabel totalLab = new JLabel("Total");
     JLabel subLab = new JLabel("Subtotal");
 
@@ -110,7 +110,7 @@ public class Cappuccino extends Espresso implements ActionListener {
         labelFlavors.setBounds(300,45,250,25);
         labelFlavors.setFont(new Font(null, Font.BOLD, 15));
 
-        cart.setBounds(590,10,40,40);
+        cart.setBounds(590,300,100,40);
         cart.setFocusable(false);
         cart.addActionListener(this);
 
@@ -204,8 +204,8 @@ public class Cappuccino extends Espresso implements ActionListener {
         });
 
 
-        addCart = new JButton("Add to cart?");
-        addCart.setBounds(300, 285, 150, 30);
+        addCart = new JButton("Checkout");
+        addCart.setBounds(500, 348, 150, 30);
         addCart.setFocusable(false);
         addCart.addActionListener(this);
 
@@ -213,7 +213,7 @@ public class Cappuccino extends Espresso implements ActionListener {
         prepareDrink.setBounds(400,285,150,30);
         prepareDrink.setFocusable(false);
         prepareDrink.addActionListener(this);
-
+        frame.add(cart);
         frame.add(vanila);
         frame.add(goBack);
         frame.add(labelMilk);
@@ -259,13 +259,18 @@ public class Cappuccino extends Espresso implements ActionListener {
             frame.dispose();
             Espresso espressoMenu = new Espresso();
         }
+
         if(e.getSource()== prepareDrink){
-            frame.dispose();
-            Checkout done = new Checkout();
+            String preparation = prepare();
+            JOptionPane.showMessageDialog(null, preparation);
         }
         if (e.getSource() == comboBox) {
             System.out.println(comboBox.getSelectedItem());
 
+        }
+        if (e.getSource()== cart){
+            frame.dispose();
+            Checkout out = new Checkout();
         }
         if (e.getSource() == vanila){
             vanila.setText(vanila.getText());
@@ -278,6 +283,7 @@ public class Cappuccino extends Espresso implements ActionListener {
         }
         if(e.getSource()==brownSugar) {
             System.out.println(brownSugar.getText());
+
         }
 
     }
@@ -324,5 +330,4 @@ public class Cappuccino extends Espresso implements ActionListener {
 
 
 
-
-
+   
