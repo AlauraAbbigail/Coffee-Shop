@@ -4,12 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Espresso extends Coffee implements ActionListener {
-
     JFrame frame = new JFrame();
     JLabel label = new JLabel("You have selected Espresso Menu");
     JButton goBack = new JButton("<");
-    JButton latte = new JButton("Latte");
-    JButton cappuccino = new JButton("Cappuccino");
+    JButton latte = new JButton("Latte $5");
+    JButton cappuccino = new JButton("Cappuccino $4");
     JLabel labelLatte = new JLabel("Latte");
     JLabel labelCapp = new JLabel("Cappuccino");
     String[] eShots = {"1", "2", "3", "4"};
