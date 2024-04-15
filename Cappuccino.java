@@ -1,4 +1,4 @@
-mport javax.swing.*;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -125,12 +125,6 @@ public class Cappuccino extends Espresso implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == comboBox){
-                    if(e.getSource()==comboBox.getItemAt(0)){
-                        subtotal = subtotal + 1.00;
-                    }else{
-                        subtotal = subtotal -1.00;
-                    }
-
                     String orderDetail = (String)comboBox.getSelectedItem();
                     coffee.saveOrder(orderDetail);
                     System.out.println(comboBox.getSelectedItem());
@@ -252,17 +246,6 @@ public class Cappuccino extends Espresso implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         DecimalFormat df = new DecimalFormat("0.00");
-        if (e.getSource() == wMilk) {
-            subtotal = subtotal + 0.00;
-        }
-        if (e.getSource() == aMilk) {
-            subtotal = subtotal + 3.25;
-
-        }
-        if (e.getSource() == oMilk) {
-            subtotal = subtotal + 4.50;
-            System.out.println(subtotal);
-        }
 
         CapSub.setText(Double.toString(subtotal));
         subtotal = Double.parseDouble(CapSub.getText());
@@ -296,12 +279,49 @@ public class Cappuccino extends Espresso implements ActionListener {
         if(e.getSource()==brownSugar) {
             System.out.println(brownSugar.getText());
         }
+
     }
+    //LADARIUS PATRICK
     private void updateOrderTextArea() {
         List<String> orders = coffee.loadOrders();
         orderTextArea.setText(String.join("\n", orders));
     }
+    //Alaura Buzbee
+    public String prepare() {
+        String selectedEType = (String) comboBox3.getSelectedItem();
+        String selectedTemp = (String) comboBox2.getSelectedItem();
+        String selectedEShots = (String) comboBox4.getSelectedItem();
+        String selectedMilk = (String) comboBox.getSelectedItem();
+        String flavor1 = (String) vanila.getText();
+        String flavor2 = (String) mocha.getText();
+        String flavor3 = (String) caramel.getText();
+        String flavor4 = (String) brownSugar.getText();
+
+        String instructions = "Preparing your Coffee Order: \n\n";
+        instructions += "Getting your 6 oz cup" + "\n";
+        instructions += "Getting that perfect temperature of " + selectedTemp + "\n";
+        instructions += "Grinding and pulling your " + selectedEType + " espresso" + "\n";
+        instructions += "Adding the perfect amount of " + selectedEShots + " espresso shots" + "\n";
+        instructions += "Pouring in your favorite " + selectedMilk + "\n";
+        if (vanila.isSelected()) {
+            instructions += "Adding a pump of " + flavor1 + "\n";
+        }
+        if (mocha.isSelected()) {
+            instructions += "Adding a pump of " + flavor2 + "\n";
+        }
+        if (brownSugar.isSelected()) {
+            instructions += "Adding a pump of " + flavor3 + "\n";
+        }
+        if (caramel.isSelected()) {
+            instructions += "Adding a pump of " + flavor4 + "\n";
+        }
+        instructions += "Enjoy your drink, and thanks for coming to 8-Bit Coffee!";
+
+        return instructions;
+    }
 }
+
+
 
 
 
