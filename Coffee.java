@@ -2,18 +2,31 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Coffee implements ActionListener {
-
+    private String filePath;
     JFrame frame = new JFrame();
     JButton option1 = new JButton("Espresso");
     JButton option2 = new JButton("Filtered Coffee");
     JComboBox comboBox = new JComboBox();
-    String[] milkOptions = {"whole milk", "almond milk", "oatmilk"};
+
+    String[] milkOptions = {"whole milk ", "almond milk", "oatmilk"};
+
+    String[] espressoType = {"Regular","Decaf","Half Caff"};
     String[] flavors = {"vanilla", "mocha", "caramel", "brown sugar"};
-    String[] size = {"6 oz","8 oz","12 oz", "16 oz"};
+
+    String[] size = {"12 oz", "16 oz"};
     String[] temp = {"Hot", "Iced"};
-    JButton addCart = new JButton("Add to Cart?");
+    JLabel labelFlavors = new JLabel("Optional: Select Flavors");
+    JCheckBox flavorCB1 = new JCheckBox();
+    JCheckBox flavorCB2 = new JCheckBox();
+    JCheckBox flavorCB3 = new JCheckBox();
+    JCheckBox flavorCB4 = new JCheckBox();
+    JButton prepareDrink = new JButton("Prepare Order");
+
     JButton cart = new JButton();
     JButton finalCheckout = new JButton("Ready to check out?");
     JButton addMore = new JButton("Want to order more?");
@@ -27,7 +40,7 @@ public class Coffee implements ActionListener {
     //background image made by Alaura Buzbee
     ImageIcon pic = new ImageIcon(getClass().getResource("Coffee_Background.png"));
     Image icon = pic.getImage();
-    Image scaledImage = icon.getScaledInstance(700, 400, Image.SCALE_SMOOTH);
+    Image scaledImage = icon.getScaledInstance(700, 700, Image.SCALE_SMOOTH);
     JLabel background = new JLabel(new ImageIcon(scaledImage));
 
     //espresso image made by Alaura Buzbee
@@ -98,6 +111,28 @@ public class Coffee implements ActionListener {
             frame.dispose();
             FilteredCoffee fCMenu = new FilteredCoffee();
         }
-
+    }
+    public Coffee(String filePath){
+        this.filePath = filePath;
+    }
+    public void saveOrder(String orderDetails){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true))){
+            writer.write(orderDetails);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public java.util.List<String> loadOrders(){
+        List<String> orders = new ArrayList<>();
+        try(BufferedReader reader = new BufferedReader(new FileReader(filePath))){
+            String line;
+            while((line = reader.readLine())!= null){
+                orders.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return orders;
     }
 }
