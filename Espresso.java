@@ -6,20 +6,27 @@ import java.awt.event.ActionListener;
 public class Espresso extends Coffee implements ActionListener {
 
     JFrame frame = new JFrame();
-    JLabel label = new JLabel("You have selected Espresso Menu");
+    //placeholder JLabel label = new JLabel("You have selected Espresso Menu");
     JButton goBack = new JButton("<");
+
     JButton latte = new JButton("Latte");
     JButton cappuccino = new JButton("Cappuccino");
     JLabel labelLatte = new JLabel("Latte");
     JLabel labelCapp = new JLabel("Cappuccino");
-    String[] eShots = {"1", "2", "3", "4"};
+    String[] eShots = {"1", "2 (standard)", "3 (+$0.75)", "4 (+$1.50)"};
+
+    ImageIcon picE = new ImageIcon(getClass().getResource("espressoMenuImage.png"));
+    Image iconE = picE.getImage();
+    Image scaledImageE = iconE.getScaledInstance(550,60, Image.SCALE_SMOOTH);
+    JLabel bannerE = new JLabel(new ImageIcon(scaledImageE));
 
     Espresso() {
 
-        label.setBounds(0,0,600,50);
-        label.setFont(new Font(null, Font.PLAIN, 15));
+        bannerE.setBounds(25,5,600,70);
+        bannerE.setFocusable(false);
+        bannerE.setVisible(true);
 
-        goBack.setBounds(640,10,40,40);
+        goBack.setBounds(630,10,50,50);
         goBack.setFocusable(false);
         goBack.addActionListener(this);
 
@@ -38,7 +45,7 @@ public class Espresso extends Coffee implements ActionListener {
         background.setVisible(true);
 
         frame.add(goBack);
-        frame.add(label);
+        frame.add(bannerE);
         frame.add(labelLatte);
         frame.add(labelCapp);
         frame.add(latte);

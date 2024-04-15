@@ -9,11 +9,18 @@ public class Coffee implements ActionListener {
     JButton option1 = new JButton("Espresso");
     JButton option2 = new JButton("Filtered Coffee");
     JComboBox comboBox = new JComboBox();
-    String[] milkOptions = {"whole milk", "almond milk", "oatmilk"};
+    String[] milkOptions = {"whole milk", "almond milk  (+$0.60)", "oatmilk   (+$0.75)"};
+    String [] espressoType = {"Regular", "Decaf", "Half Caff"};
     String[] flavors = {"vanilla", "mocha", "caramel", "brown sugar"};
-    String[] size = {"6 oz","8 oz","12 oz", "16 oz"};
+    String[] size = {"12 oz  +($4.50)", "16 oz +($5.00)"};
     String[] temp = {"Hot", "Iced"};
-    JButton addCart = new JButton("Add to Cart?");
+    String instructions = "";
+    JLabel labelFlavors = new JLabel("Optional: Select Flavors");
+    JCheckBox flavorsCB1 = new JCheckBox();
+    JCheckBox flavorsCB2 = new JCheckBox();
+    JCheckBox flavorsCB3 = new JCheckBox();
+    JCheckBox flavorsCB4 = new JCheckBox();
+    JButton prepareDrink = new JButton("Prepare Order");
     JButton cart = new JButton();
     JButton finalCheckout = new JButton("Ready to check out?");
     JButton addMore = new JButton("Want to order more?");
@@ -88,6 +95,12 @@ public class Coffee implements ActionListener {
         frame.setVisible(true);
     }
 
+    //prepare order method
+    public String prepare() {
+        return "Please select an option on the menu";
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==option1) {
@@ -97,6 +110,10 @@ public class Coffee implements ActionListener {
         if(e.getSource()==option2) {
             frame.dispose();
             FilteredCoffee fCMenu = new FilteredCoffee();
+        }
+        if(e.getSource()==prepareDrink) {
+            String preparation = prepare();
+            JOptionPane.showMessageDialog(null, preparation);
         }
 
     }
