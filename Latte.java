@@ -1,13 +1,17 @@
-mport javax.swing.*;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Latte extends Espresso implements ActionListener {
     Coffee coffee;
     private JTextArea orderTextArea;
     private double ltotal;
+    private double laSub;
+    private final Double LATTE = 5.00;
 
     private static final String CSV_FILE_PATH = "orderH.csv";
     double total;
@@ -32,10 +36,11 @@ public class Latte extends Espresso implements ActionListener {
     JLabel labelFlavors = new JLabel("Any flavors? ");
     JComboBox comboBox4 = new JComboBox();
     JButton addCart = new JButton("cart?");
-    JButton cart = new JButton();
+    JButton cart = new JButton("Checkout");
     JLabel totlab = new JLabel("Total");
 
     JTextField Totalbox = new JTextField();
+    JTextField SubBox = new JTextField();
     JLabel labelMilk = new JLabel("Select Milk Type: ");
     JTextArea order = new JTextArea("Your order");
 
@@ -53,9 +58,9 @@ public class Latte extends Espresso implements ActionListener {
         goBack.setFocusable(false);
         goBack.addActionListener(this);
 
-//        cart.setBounds(550,10,60,40);
-//        cart.setFocusable(false);
-//        cart.addActionListener(this);
+        cart.setBounds(300,320,100,40);
+        cart.setFocusable(false);
+        cart.addActionListener(this);
 
         labelSize.setBounds(50,45,150,25);
         labelSize.setFont(new Font(null, Font.BOLD,15));
@@ -63,6 +68,7 @@ public class Latte extends Espresso implements ActionListener {
         comboBox = new JComboBox(size);
         comboBox.addActionListener(this);
         comboBox.setBounds(50,75,150,30);
+        //LADARIUS PATRICK
         comboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,6 +85,7 @@ public class Latte extends Espresso implements ActionListener {
         comboBox2 = new JComboBox(temp);
         comboBox2.addActionListener(this);
         comboBox2.setBounds(50,145,150,30);
+        //LADARIUS PATRICK
         comboBox2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,6 +103,7 @@ public class Latte extends Espresso implements ActionListener {
         vanila = new JCheckBox("vanilla (+$0.50)");
         vanila.addActionListener(this);
         vanila.setBounds(300,75,150,30);
+        //LADARIUS PATRICK
         vanila.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -111,6 +119,7 @@ public class Latte extends Espresso implements ActionListener {
         mocha = new JCheckBox("mocha (+$0.50)");
         mocha.addActionListener(this);
         mocha.setBounds(300,105,150,30);
+        //LADARIUS PATRICK
         mocha.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -125,6 +134,7 @@ public class Latte extends Espresso implements ActionListener {
         caramel = new JCheckBox("caramel (+$0.50)");
         caramel.addActionListener(this);
         caramel.setBounds(300,135,150,30);
+        //LADARIUS PATRICK
         caramel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -140,6 +150,7 @@ public class Latte extends Espresso implements ActionListener {
         brownSugar = new JCheckBox("brown sugar (+$0.75)");
         brownSugar.addActionListener(this);
         brownSugar.setBounds(300,165,150,30);
+        //LADARIUS PATRICK
         brownSugar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -159,11 +170,13 @@ public class Latte extends Espresso implements ActionListener {
         totlab.setBounds(500,280,100,20);
         totlab.setFont(new Font(null,Font.BOLD,14));
         Totalbox.setBounds(500,300,100,20);
+        SubBox.setBounds(500,250,100,20);
 
 
         comboBox3 = new JComboBox(eShots);
         comboBox3.addActionListener(this);
         comboBox3.setBounds(50,215,150,30);
+        //LADARIUS PATRICK
         comboBox3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -179,6 +192,7 @@ public class Latte extends Espresso implements ActionListener {
         comboBox4 = new JComboBox(flavors);
         comboBox4.addActionListener(this);
         comboBox4.setBounds(50,285,150,30);
+        //LADARIUS PATRICK
         comboBox4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -217,6 +231,7 @@ public class Latte extends Espresso implements ActionListener {
         frame.add(prepareDrink);
         frame.add(Totalbox);
         frame.add(totlab);
+        frame.add(cart);
         frame.add(background);
 
 
@@ -233,23 +248,60 @@ public class Latte extends Espresso implements ActionListener {
             Espresso espressoMenu = new Espresso();
 
         }
-        if (e.getSource() == comboBox.getSelectedItem()) {
-            subtotal = subtotal+4.50;
-            System.out.println(comboBox.getSelectedItem()+" "+subtotal);
-        }
-        if (e.getSource() == addCart) {
-            System.out.println(addCart.getSelectedIcon());
+        if (e.getSource() == cart){
             frame.dispose();
-            CustomerGui checkout = new CustomerGui();;
+            Checkout out = new Checkout();
         }
-        if (e.getSource() == cart) {
-            frame.dispose();
-            CustomerGui checkout = new CustomerGui();
+        if (e.getSource() == prepareDrink) {
+            String preparation = prepare();
+            JOptionPane.showMessageDialog(null, preparation);;
         }
+        //LADARIUS PATRICK
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        SubBox.setText(Double.toString(subtotal));
+        subtotal = Double.parseDouble(SubBox.getText());
+        total = LATTE + subtotal;
+        SubBox.setText(Double.toString(subtotal));
+        Totalbox.setText(df.format(subtotal));
+        Totalbox.setText(Double.toString(total));
     }
+
+
+
     private void updateOrderTextArea() {
         List<String> orders = coffee.loadOrders();
         orderTextArea.setText(String.join("\n", orders));
     }
-}
+    public String prepare() {
+        String selectedsize = (String) comboBox.getSelectedItem();
+        String selectedTemp = (String) comboBox2.getSelectedItem();
+        String selectedEShots = (String) comboBox3.getSelectedItem();
+        String selectedMilk = (String) comboBox4.getSelectedItem();
+        String flavor1 = (String) vanila.getText();
+        String flavor2 = (String) mocha.getText();
+        String flavor3 = (String) caramel.getText();
+        String flavor4 = (String) brownSugar.getText();
 
+        String instructions = "Preparing your Coffee Order: \n\n";
+        instructions += "Getting your " + selectedsize +" cup" + "\n";
+        instructions += " Getting that perfect temperature of " + selectedTemp + "\n";
+        instructions += "Adding the perfect amount of " + selectedEShots + " espresso shots" + "\n";
+        instructions += "Pouring in your favorite " + selectedMilk + "\n";
+        if (vanila.isSelected()) {
+            instructions += "Adding a pump of " + flavor1 + "\n";
+        }
+        if (mocha.isSelected()) {
+            instructions += "Adding a pump of " + flavor2 + "\n";
+        }
+        if (caramel.isSelected()) {
+            instructions += "Adding a pump of " + flavor3 + "\n";
+        }
+        if (brownSugar.isSelected()) {
+            instructions += "Adding a pump of " + flavor4 + "\n";
+        }
+        instructions += "Your order is now ready, enjoy!";
+
+        return instructions;
+    }
+}
