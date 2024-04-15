@@ -111,6 +111,10 @@ public class Coffee implements ActionListener {
             frame.dispose();
             FilteredCoffee fCMenu = new FilteredCoffee();
         }
+        if(e.getSource()==prepareDrink) {
+            String preparation = prepare();
+            JOptionPane.showMessageDialog(null, preparation);
+        }
     }
     public Coffee(String filePath){
         this.filePath = filePath;
