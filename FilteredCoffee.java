@@ -1,4 +1,4 @@
-rt javax.swing.*;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -181,7 +181,7 @@ public class FilteredCoffee extends Coffee implements ActionListener {
         });
 
         prepareDrink = new JButton("Prepare Order");
-        prepareDrink.setBounds(300, 285, 150, 30);
+        prepareDrink.setBounds(600, 285, 150, 30);
         prepareDrink.setFocusable(false);
         prepareDrink.addActionListener(this);
 
@@ -202,7 +202,7 @@ public class FilteredCoffee extends Coffee implements ActionListener {
 //        payorder.setFocusable(false);
 
         prepareDrink = new JButton("Checkout");
-        prepareDrink.setBounds(500, 285, 150, 30);
+        prepareDrink.setBounds(300, 335, 150, 30);
         prepareDrink.setFocusable(false);
         prepareDrink.addActionListener(this);
 
@@ -295,3 +295,6 @@ public class FilteredCoffee extends Coffee implements ActionListener {
         return instructions;
     }
 }
+
+
+
