@@ -1,62 +1,249 @@
-import javax.swing.*;
+mport javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.text.DecimalFormat;
+import java.util.List;
 
 public class Cappuccino extends Espresso implements ActionListener {
+    Coffee coffee;
+    private JTextArea orderTextArea;
+
+    private static final String CSV_FILE_PATH = "orderH.csv";
     private double total;
     private double subtotal= 0.0;
-    private final double cappuccino = 5.00;
+    private final double cappuccino = 4.00;
+    private String wMilk;
+    private String aMilk;
+    private String oMilk;
+
     JFrame frame = new JFrame();
     JButton goBack = new JButton("<");
+    JLabel labelSize = new JLabel("Cappuccino only comes as a 6 oz  $4.00");
+    JCheckBox vanila= new JCheckBox("Vanila $0.35");
+    JCheckBox mocha = new JCheckBox("Mocha  $0.35");
+    JCheckBox caramel = new JCheckBox("Caramel  $0.35");
+    JCheckBox brownSugar = new JCheckBox("Brown Sugar   $0.35");
     JLabel labelMilk = new JLabel("Select Milk Type: ");
-    JComboBox comboBox = new JComboBox();
+    JComboBox comboBox = new JComboBox<>();
+    JComboBox comboBox2 = new JComboBox<>();
+    JLabel labelTemp = new JLabel("Select Hot or Iced:");
+    JComboBox comboBox3 = new JComboBox<>();
+    JComboBox comboBox4 = new JComboBox<>();
+    JLabel labelShots = new JLabel("How many Shot?");
+
+    JLabel labelEType = new JLabel("What kind of espresso?");
     JButton addCart = new JButton("Add to cart?");
+
     JButton cart = new JButton();
-    JCheckBox vanila= new JCheckBox("Vanila $1.00");
-    JCheckBox mocha = new JCheckBox("Mocha  $2.00");
-    JCheckBox caramel = new JCheckBox("Caramel  $3.00");
-    JCheckBox brownSugar = new JCheckBox("Brown Sugar   $5.00");
-    JLabel labelMilk = new JLabel("Select Milk Type: ");
+    JLabel totalLab = new JLabel("Total");
+    JLabel subLab = new JLabel("Subtotal");
+
     JTextField CapTotal = new JTextField();
     JTextField CapSub = new JTextField();
 
     Cappuccino() {
-        //subtotal and total LABEL THEM LATER.
-        CapSub.setBounds(50,200,300,30);
-        CapTotal.setBounds(50,300,300,30);
+        coffee= new Coffee(CSV_FILE_PATH);
 
-        goBack.setBounds(640,10,40,40);
+        goBack.setBounds(540,10,100,40);
         goBack.setFocusable(false);
         goBack.addActionListener(this);
+
+        labelSize.setBounds(50, 15, 400, 25);
+        labelSize.setFont(new Font(null, Font.BOLD, 15));
+
+        labelTemp.setBounds(50, 45, 150, 25);
+        labelTemp.setFont(new Font(null, Font.BOLD, 15));
+
+        comboBox2 = new JComboBox(temp);
+        comboBox2.addActionListener(this);
+        comboBox2.setBounds(50, 75, 150, 30);
+        comboBox2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==comboBox2){
+                    String orderDetail = (String)comboBox2.getSelectedItem();
+                    coffee.saveOrder(orderDetail);
+                    System.out.println(comboBox2.getSelectedItem());
+                    JOptionPane.showMessageDialog(null, "order placed!");
+                }
+            }
+        });
+
+        labelEType.setBounds(50, 160, 250, 25);
+        labelEType.setFont(new Font(null, Font.BOLD, 15));
+
+        comboBox3 = new JComboBox(espressoType);
+        comboBox3.addActionListener(this);
+        comboBox3.setBounds(50, 180, 150, 30);
+        comboBox3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource()== comboBox3){
+                    String orderDetail = (String)comboBox3.getSelectedItem();
+                    coffee.saveOrder(orderDetail);
+                    System.out.println(comboBox3.getSelectedItem());
+                    JOptionPane.showMessageDialog(null, "order placed!");
+                }
+            }
+        });
+
+        labelShots.setBounds(50, 205, 250, 30);
+        labelShots.setFont(new Font(null, Font.BOLD, 15));
+
+        comboBox4 = new JComboBox<>(eShots);
+        comboBox4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == comboBox4) {
+                    String orderDetails = (String)comboBox4.getSelectedItem();
+                    coffee.saveOrder(orderDetails +" shots");
+                    System.out.println(comboBox4.getSelectedItem()+" shots");
+                    JOptionPane.showMessageDialog(null, "order placed!");
+                }
+            }
+        });
+        comboBox4.setBounds(50, 245, 150, 30);
+
+        labelFlavors.setBounds(300,45,250,25);
+        labelFlavors.setFont(new Font(null, Font.BOLD, 15));
 
         cart.setBounds(590,10,40,40);
         cart.setFocusable(false);
         cart.addActionListener(this);
 
-        labelMilk.setBounds(50,45,150,25);
+        labelMilk.setBounds(50,100,150,25);
         labelMilk.setFont(new Font(null, Font.BOLD,15));
 
-        comboBox = new JComboBox(milkOptions);
-        comboBox.addActionListener(this);
-        comboBox.setBounds(50,75,150,30);
+        comboBox = new JComboBox<>(milkOptions);
+        wMilk = (String) comboBox.getItemAt(0);
+        aMilk = (String)comboBox.getItemAt(1);
+        oMilk = (String)comboBox.getItemAt(2);
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == comboBox){
+                    if(e.getSource()==comboBox.getItemAt(0)){
+                        subtotal = subtotal + 1.00;
+                    }else{
+                        subtotal = subtotal -1.00;
+                    }
+
+                    String orderDetail = (String)comboBox.getSelectedItem();
+                    coffee.saveOrder(orderDetail);
+                    System.out.println(comboBox.getSelectedItem());
+                    JOptionPane.showMessageDialog(null, "order placed!");
+                }
+            }
+        });
+
+        labelSize.setBounds(50,15,400,25);
+        labelSize.setFont(new Font(null,Font.BOLD,15));
+
+
+        comboBox.setBounds(50,125,150,30);
+        totalLab.setBounds(50,330,100,20);
+        totalLab.setFont(new Font(null,Font.BOLD,12));
+        CapSub.setBounds(50,300,100,20);
+
+        subLab.setBounds(50,280,100,20);
+        subLab.setFont(new Font(null,Font.BOLD,12));
+        CapTotal.setBounds(50,350,100,20);
+
+        vanila.setBounds(250,75,200,30);
+        vanila.addActionListener(this);
+        vanila.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (vanila.isSelected()) {
+                    subtotal = subtotal + 0.35;
+                }else{
+                    subtotal= subtotal -0.35;
+                    System.out.println(vanila.getText()+ " removed");
+                }
+            }
+        });
+
+        mocha.setBounds(250,95,200,30);
+        mocha.addActionListener(this);
+        mocha.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (mocha.isSelected()) {
+                    subtotal = subtotal + 0.35;
+                }else{
+                    subtotal= subtotal -0.35;
+                    System.out.println(mocha.getText()+ " removed");
+
+                }
+            }
+        });
+
+        caramel.setBounds(250,115,200,30);
+        caramel.addActionListener(this);
+        caramel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (caramel.isSelected()) {
+                    subtotal = subtotal + 0.35;
+                }else{
+                    subtotal= subtotal -0.35;
+                    System.out.println(caramel.getText()+ " removed");
+                }
+            }
+        });
+
+        brownSugar.setBounds(250,135,200,30);
+        brownSugar.addActionListener(this);
+        brownSugar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (brownSugar.isSelected()) {
+                    subtotal = subtotal + 0.35;
+                }else{
+                    subtotal= subtotal -0.35;
+                    System.out.println(brownSugar.getText()+ " removed");
+                }
+            }
+        });
+
 
         addCart = new JButton("Add to cart?");
         addCart.setBounds(300, 285, 150, 30);
         addCart.setFocusable(false);
         addCart.addActionListener(this);
 
-        background.setBounds(0,0,700,400);
-        background.setFocusable(false);
-        background.setVisible(true);
+        prepareDrink = new JButton("Prepare Order");
+        prepareDrink.setBounds(400,285,150,30);
+        prepareDrink.setFocusable(false);
+        prepareDrink.addActionListener(this);
 
+        frame.add(vanila);
         frame.add(goBack);
         frame.add(labelMilk);
         frame.add(comboBox);
+        frame.add(mocha);
+        frame.add(caramel);
+        frame.add(brownSugar);
         frame.add(CapTotal);
         frame.add(CapSub);
+        frame.add(prepareDrink);
+        frame.add(labelSize);
+        frame.add(labelTemp);
+        frame.add(comboBox2);
+        frame.add(labelEType);
+        frame.add(comboBox3);
+        frame.add(comboBox4);
+        frame.add(labelShots);
+        frame.add(totalLab);
+        frame.add(subLab);
         frame.add(background);
 
+        background.setBounds(0,0,700,400);
+        background.setFocusable(false);
+        background.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700,400);
         frame.setLayout(null);
@@ -64,26 +251,58 @@ public class Cappuccino extends Espresso implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(vanila.isSelected()) {
-            subtotal = subtotal + 1.00;
-        } else if (mocha.isSelected()) {
-            subtotal = subtotal + 2.00;
-        } else if (caramel.isSelected()) {
-            subtotal = subtotal+3.00;
-        }else if (brownSugar.isSelected()) {
-            subtotal = subtotal + 5.00;
+        DecimalFormat df = new DecimalFormat("0.00");
+        if (e.getSource() == wMilk) {
+            subtotal = subtotal + 0.00;
         }
+        if (e.getSource() == aMilk) {
+            subtotal = subtotal + 3.25;
+
+        }
+        if (e.getSource() == oMilk) {
+            subtotal = subtotal + 4.50;
+            System.out.println(subtotal);
+        }
+
         CapSub.setText(Double.toString(subtotal));
-        subtotal= Double.parseDouble(CapSub.getText());
-        total= cappuccino+subtotal;
+        subtotal = Double.parseDouble(CapSub.getText());
+        total = cappuccino + subtotal;
         CapSub.setText(Double.toString(subtotal));
+        CapSub.setText(df.format(subtotal));
         CapTotal.setText(Double.toString(total));
+        CapTotal.setText(df.format(total));
+
         if (e.getSource() == goBack) {
             frame.dispose();
             Espresso espressoMenu = new Espresso();
         }
+        if(e.getSource()== prepareDrink){
+            frame.dispose();
+            Checkout done = new Checkout();
+        }
         if (e.getSource() == comboBox) {
             System.out.println(comboBox.getSelectedItem());
+
+        }
+        if (e.getSource() == vanila){
+            vanila.setText(vanila.getText());
+        }
+        if (e.getSource()==mocha){
+            System.out.println(mocha.getText());
+        }
+        if(e.getSource()==caramel){
+            System.out.println(caramel.getText());
+        }
+        if(e.getSource()==brownSugar) {
+            System.out.println(brownSugar.getText());
         }
     }
+    private void updateOrderTextArea() {
+        List<String> orders = coffee.loadOrders();
+        orderTextArea.setText(String.join("\n", orders));
+    }
 }
+
+
+
+
